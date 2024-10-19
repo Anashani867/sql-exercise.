@@ -1,0 +1,412 @@
+ 1) 
+
+CREATE TABLE `students` (
+    `student_id` INT AUTO_INCREMENT PRIMARY KEY,
+    `first_name` VARCHAR(30),
+    `last_name` VARCHAR(30),
+    `email` VARCHAR(50),
+    `date_of_birth` DATE,
+    `gender` ENUM('Male', 'Female', 'Mail'),
+    `major` VARCHAR(50),
+    `enrollment_year` YEAR
+);
+
+CREATE TABLE `courses` (
+    `course_id` INT AUTO_INCREMENT PRIMARY KEY,
+    `course_name` VARCHAR(100),
+    `course_code` VARCHAR(10)
+);
+
+
+
+CREATE TABLE `Enrollments` (
+    `enrollment_id` INT AUTO_INCREMENT PRIMARY KEY,
+    `student_id` INT,
+    `course_id` INT,
+    `grade` INT,
+    CONSTRAINT `fk_student` FOREIGN KEY (`student_id`) REFERENCES `students`(`student_id`),
+    CONSTRAINT `fk_course` FOREIGN KEY (`course_id`) REFERENCES `courses`(`course_id`)
+);
+
+
+
+
+CREATE TABLE `Course_Assignments` (
+    `assignment_id` INT AUTO_INCREMENT PRIMARY KEY,  
+    `instructor_id` INT,                             
+    `course_id` INT,                                 
+    `semester` VARCHAR(10),                         
+    `year` INT,                                    
+    
+    CONSTRAINT `fk_instructor` FOREIGN KEY (`instructor_id`) REFERENCES `Instructors`(`instructor_id`),
+
+   
+    CONSTRAINT `fk_course` FOREIGN KEY (`course_id`) REFERENCES `Courses`(`course_id`)
+);
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2)
+INSERT INTO `students`(`first_name`, `last_name`, `email`, ` date_of_birth`, `gender`, `major`, `enrollment_year`) VALUES ( 'Sara', 'Khan', 'sara.khan@example.com', '1999-05-23', 'Female', 'Information Technology', 2019);
+INSERT INTO `students`(`first_name`, `last_name`, `email`, ` date_of_birth`, `gender`, `major`, `enrollment_year`) VALUES ( 'Omar', 'Hassan', 'omar.hassan@example.com', '2001-09-10', 'Male', 'Software Engineering', 2021);
+INSERT INTO `students`(`first_name`, `last_name`, `email`, ` date_of_birth`, `gender`, `major`, `enrollment_year`) VALUES ( 'Laila', 'Mohammed', 'laila.mohammed@example.com', '2000-02-12', 'Female', 'Computer Science', 2020);
+INSERT INTO `students`(`first_name`, `last_name`, `email`, ` date_of_birth`, `gender`, `major`, `enrollment_year`) VALUES( 'Tariq', 'Nasser', 'tariq.nasser@example.com', '1998-11-30', 'Male', 'Data Science', 2018);
+INSERT INTO `students`(`first_name`, `last_name`, `email`, ` date_of_birth`, `gender`, `major`, `enrollment_year`) VALUES( 'Yasmin', 'Suleiman', 'yasmin.suleiman@example.com', '2001-03-05', 'Female', 'Cybersecurity', 2021);
+INSERT INTO `students`(`first_name`, `last_name`, `email`, ` date_of_birth`, `gender`, `major`, `enrollment_year`) VALUES ( 'Khaled', 'Hussain', 'khaled.hussain@example.com', '1999-08-22', 'Male', 'Network Engineering', 2019);
+
+
+INSERT INTO `courses` (`course_name`, `course_code`, `credits`, `department`) 
+VALUES ('Introduction to Computer Science', 'CS101', 3, 'Computer Science');
+INSERT INTO `courses` (`course_name`, `course_code`, `credits`, `department`) 
+VALUES ('Introduction to Computer ', 'C101', 3, 'Computer');
+INSERT INTO `courses` (`course_name`, `course_code`, `credits`, `department`) 
+VALUES ('Introduction to Computer information system ', 'Cis101', 3, 'Computer information system ');
+INSERT INTO `courses` (`course_name`, `course_code`, `credits`, `department`) 
+VALUES ('Introduction to Computer information system ', 'Cis101', 3, 'Computer information system ');
+INSERT INTO `courses` (`course_name`, `course_code`, `credits`, `department`) 
+VALUES ('Data Structures and Algorithms', 'CS202', 4, 'Computer Science');
+INSERT INTO `courses` (`course_name`, `course_code`, `credits`, `department`) 
+VALUES ('Microeconomics', 'ECON101', 3, 'Economics');
+INSERT INTO `courses` (`course_name`, `course_code`, `credits`, `department`) 
+VALUES ('World History', 'HIST101', 3, 'History');
+
+
+
+INSERT INTO `instructors` ( `first_name`, `last_name`, `email`, `hire_date`, `department`) 
+VALUES ('John', 'Doe', 'john.doe@example.com', '2015-08-23', 'Computer Science');
+
+INSERT INTO `instructors` (`first_name`, `last_name`, `email`, `hire_date`, `department`) 
+VALUES ( 'Jane', 'Smith', 'jane.smith@example.com', '2016-07-15', 'Economics');
+
+INSERT INTO `instructors` ( `first_name`, `last_name`, `email`, `hire_date`, `department`) 
+VALUES ('Michael', 'Brown', 'michael.brown@example.com', '2014-05-10', 'History');
+
+INSERT INTO `instructors` ( `first_name`, `last_name`, `email`, `hire_date`, `department`) 
+VALUES ( 'Emily', 'Johnson', 'emily.johnson@example.com', '2017-03-08', 'Mathematics');
+
+INSERT INTO `instructors` ( `first_name`, `last_name`, `email`, `hire_date`, `department`) 
+VALUES ( 'David', 'Wilson', 'david.wilson@example.com', '2018-02-01', 'Physics');
+
+INSERT INTO `instructors` (` `first_name`, `last_name`, `email`, `hire_date`, `department`) 
+VALUES ( 'Sarah', 'Lee', 'sarah.lee@example.com', '2019-11-12', 'Biology');
+
+INSERT INTO `instructors` ( `first_name`, `last_name`, `email`, `hire_date`, `department`) 
+VALUES ( 'James', 'Taylor', 'james.taylor@example.com', '2020-09-30', 'Chemistry');
+
+INSERT INTO `instructors` ( `first_name`, `last_name`, `email`, `hire_date`, `department`) 
+VALUES ( 'Laura', 'Anderson', 'laura.anderson@example.com', '2013-12-05', 'English');
+
+INSERT INTO `instructors` ( `first_name`, `last_name`, `email`, `hire_date`, `department`) 
+VALUES ( 'Robert', 'Thomas', 'robert.thomas@example.com', '2021-04-22', 'Sociology');
+
+INSERT INTO `instructors` ( `first_name`, `last_name`, `email`, `hire_date`, `department`) 
+VALUES ('Jessica', 'White', 'jessica.white@example.com', '2022-06-18', 'Philosophy');
+
+
+INSERT INTO `enrollments` ( student_id, course_id, grade) VALUES
+( 1, 1, NULL), 
+( 1, 2, NULL), 
+( 2, 3, NULL), 
+( 2, 1, NULL), 
+( 3, 5, NULL), 
+( 3, 4, NULL), 
+( 4, 1, NULL), 
+( 4, 3, NULL), 
+( 5, 2, NULL), 
+( 5, 5, NULL), 
+( 6, 4, NULL), 
+( 6, 2, NULL), 
+( 7, 1, NULL), 
+( 7, 4, NULL), 
+( 8, 3, NULL), 
+( 8, 2, NULL), 
+( 9, 5, NULL), 
+( 9, 1, NULL), 
+( 10, 3, NULL), 
+( 10, 5, NULL); 
+
+
+
+
+
+INSERT INTO course_assignments (assignment_id, instructor_id, course_id, semester, year)
+VALUES
+(1, 101, 1, 'Fall', 2023),   
+(2, 102, 2, 'Spring', 2024), 
+(3, 103, 3, 'Fall', 2023),   
+(4, 104, 4, 'Summer', 2024), 
+(5, 105, 5, 'Fall', 2023);   
+----------------------------------------------------------------------------------------------------------------------------------------
+3)
+
+1)SELECT * FROM `students`;
+
+
+SELECT COUNT(*) AS Courses_id FROM courses;
+
+
+SELECT students.first_name, students.last_name
+FROM students
+JOIN enrollments1 ON students.student_id = enrollments1.student
+;
+//WHERE enrollments1.course_id = 2;
+
+
+SELECT email 
+FROM instructors ;
+
+
+SELECT c.course_name, COUNT(e.student_id) AS number_of_students
+FROM courses c
+LEFT JOIN enrollments1 e ON c.course_id = e.course_id
+GROUP BY c.course_id, c.course_name;
+
+
+
+SELECT course_name, COUNT(student_id) AS num_students_enrolled
+FROM courses 
+LEFT JOIN enrollments1  ON course.course_id = enrollments1.course_id
+GROUP BY course.course_id;
+
+SELECT *FROM enrollments1
+WHERE grade LIKE "A%";
+
+
+
+SELECT courses.course_name, instructors.first_name, instructors.last_name, course_assignments.semester, course_assignments.year
+FROM courses
+INNER JOIN course_assignments ON course_assignments.course_id = course_assignments.course_id
+INNER JOIN instructors ON course_assignments.instructor_id = instructors.instructor_id;
+
+SELECT AVG(CASE 
+               WHEN grade = 'A' THEN 4
+               WHEN grade = 'B' THEN 3
+               WHEN grade = 'C' THEN 2
+               WHEN grade = 'D' THEN 1
+               WHEN grade = 'F' THEN 0
+           END) AS average_grade
+FROM enrollments1 e
+JOIN courses c ON e.course_id = c.Courses_id
+WHERE c.course_name = 'Math';
+
+
+9-SELECT s.first_name, s.last_name, COUNT(e.course_id) AS course_count FROM studentss s JOIN enrollments e ON s.student_id = e.student_id JOIN courseassignments ca ON e.course_id = ca.course_id WHERE ca.semester = 'Current Semester' -- Replace with the actual current semester GROUP BY s.student_id, s.first_name, s.last_name HAVING course_count > 3;
+
+
+
+SELECT students.first_name, students.last_name, courses.course_name, enrollments1.grade
+FROM students
+INNER JOIN enrollments1 ON students.student_id = enrollments1.student_id
+INNER JOIN courses ON enrollments1.course_id = courses.Courses_id
+WHERE enrollments1.grade IS NULL ||enrollments1.grade <=49;
+
+SELECT students.first_name, students.last_name, AVG(enrollments1.grade) AS average_grade
+FROM students
+INNER JOIN enrollments1 ON students.student_id = enrollments.student_id
+GROUP BY students.student_id
+ORDER BY average_grade DESC
+LIMIT 1;
+
+
+SELECT `course_id`, COUNT(*) AS course_count
+FROM course_assignments ca
+JOIN courses c ON c.Courses_id  = ca.course_id
+WHERE year = EXTRACT(YEAR FROM CURRENT_DATE)  -- Adjust for your SQL dialect if needed
+GROUP BY department
+ORDER BY course_count DESC
+LIMIT 1;
+
+
+
+SELECT s.first_name, s.last_name
+FROM students s
+JOIN courses c ON c.Courses_id = s.student_id  -- Adjust this if the column names differ
+WHERE c.credits IS NULL OR c.credits = 1
+LIMIT 0, 25;
+
+
+
+
+
+
+
+
+
+DELIMITER //
+
+CREATE FUNCTION calculate_age(date_of_birth DATE)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE age INT;
+    
+    SET age = YEAR(CURDATE()) - YEAR(date_of_birth);
+    
+    -- Check if the birthday has occurred this year
+    IF (DATE_FORMAT(CURDATE(), '%m%d') < DATE_FORMAT(date_of_birth, '%m%d')) THEN
+        SET age = age - 1;
+    END IF;
+    
+    RETURN age;
+END //
+
+DELIMITER ;
+
+
+
+SELECT first_name, last_name, calculate_age(date_of_birth) AS age
+FROM students;
+
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE enroll_student(
+    IN p_student_id INT,
+    IN p_course_id INT
+)
+BEGIN
+    DECLARE existing_enrollment INT;
+
+    -- Check if the student is already enrolled in the course
+    SELECT COUNT(*) INTO existing_enrollment
+    FROM enrollments
+    WHERE student_id = p_student_id AND course_id = p_course_id;
+
+    -- If not enrolled, insert a new record
+    IF existing_enrollment = 0 THEN
+        INSERT INTO enrollments (student_id, course_id)
+        VALUES (p_student_id, p_course_id);
+        SELECT 'Enrollment successful' AS message;
+    ELSE
+        SELECT 'Student is already enrolled in this course' AS message;
+    END IF;
+END //
+
+DELIMITER ;
+
+
+
+SELECT COUNT(*) INTO existing_enrollment
+FROM enrollments
+WHERE student_id = p_student_id AND course_id = p_course_id;
+CALL enroll_student(1, 101);
+
+
+SELECT d.department, AVG(g.grade) AS average_grade
+FROM enrollments1 g
+JOIN courses c ON g.course_id = c.Courses_id
+--JOIN instructors d ON c.instructor_id= d.department
+GROUP BY d.department;
+
+=-------------------
+ALTER TABLE `students` 
+ADD CONSTRAINT `chk_email_validation` 
+CHECK (`email` REGEXP '^[a-zA-Z0-9][a-zA-Z0-9.!#$%&\'*+-/=?^_`{|}~]*[a-zA-Z0-9._-]?[a-zA-Z0-9]@[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]?\\.[a-zA-Z]{2,63}$');
+
+
+DELIMITER //
+
+CREATE PROCEDURE enroll_student_if_capacity_allows(
+    IN p_student_id INT,
+    IN p_courses_id INT  -- Updated parameter name to match the table
+)
+BEGIN
+    DECLARE current_enrollment INT;
+    DECLARE course_capacity INT;
+
+    -- Start a transaction
+    START TRANSACTION;
+
+    -- Get the current enrollment count for the course
+    SELECT COUNT(*) INTO current_enrollment
+    FROM enrollments1
+    WHERE courses_id = p_courses_id;  -- Use the correct column name
+
+    -- Get the course capacity
+    SELECT capacity INTO course_capacity
+    FROM courses
+    WHERE course_id = p_courses_id;  -- Ensure the correct reference
+
+    -- Check if the enrollment count is less than capacity
+    IF current_enrollment < course_capacity THEN
+        -- Insert the enrollment record
+        INSERT INTO enrollments1 (student_id, courses_id)  -- Use the correct column name
+        VALUES (p_student_id, p_courses_id);
+        
+        -- Commit the transaction
+        COMMIT;
+
+        SELECT 'Enrollment successful' AS message;
+    ELSE
+        -- Rollback the transaction
+        ROLLBACK;
+
+        SELECT 'Enrollment failed: Course capacity exceeded' AS message;
+    END IF;
+END //
+
+DELIMITER ;
+
+
+DESCRIBE enrollments1;
+
+
+CALL enroll_student_if_capacity_allows(1, 101);  -- Assuming 101 is a valid courses_id
+
+
+
+CREATE INDEX idx_course_code ON courses(course_code);
+
+
+
+
+SELECT s.student_id, s.first_name
+FROM students s
+JOIN enrollments1 e ON s.student_id = e.student_id
+JOIN courses c ON c.Courses_id = s.student_id
+WHERE c.course_code = 'CS101';
+
+ 
+
+SELECT s.student_id, s.first_name ,c.course_name ,c.department
+FROM students s
+INNER JOIN courses c ON  c.Courses_id =s.student_id
+INNER JOIN enrollments1 e ON e.enrollment_id =s.student_id;
+
+
+SELECT  s.first_name ,c.course_name 
+FROM students s
+LEFT JOIN courses c ON  c.Courses_id =s.student_id;
+
+
+
+
+SELECT CONCAT(instructors.first_name, ' ', instructors.last_name) AS full_name
+FROM instructors
+
+UNION
+
+SELECT CONCAT(students.first_name, ' ', students.last_name) AS full_name
+FROM students;
+
+
+
+SELECT CONCAT(s.first_name , s.last_name) AS student_NAME, s.email , s.major ,e.course_id , CONCAT(i.first_name, ' ', i.last_name) AS traner_name , e.grade,
+SUM(c.credits) AS total_credits
+FROM students s
+INNER JOIN enrollments1 e ON s.student_id = e.student_id
+INNER JOIN course_assignments ca ON ca.course_id= e.course_id
+INNER JOIN instructors i ON i.instructor_id = ca.instructor_id
+INNER JOIN courses c ON c.Courses_id = e.course_id
+GROUP BY s.student_id, s.first_name, s.last_name, s.email, s.major, e.course_id, i.first_name, i.last_name, e.grade
+;
+
+
+
+
+
+
